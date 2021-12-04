@@ -1,3 +1,5 @@
 FROM node:16.13.1-alpine
 
+RUN yarn add sass-loader@^12.1.0 sass resolve-url-loader@^4.0.0 --dev
+
 WORKDIR /var/www
