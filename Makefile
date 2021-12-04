@@ -14,8 +14,7 @@ migrate:
 	docker exec foxwood_php-cli_1 php artisan migrate
 
 perm:
-	sudo chown ${USER}:${USER} bootstrap/cache -R
-	sudo chown ${USER}:${USER} storage -R
+	sudo chown ${USER}:${USER} . -R
 	chmod -R 777 storage
 
 assets-install:
