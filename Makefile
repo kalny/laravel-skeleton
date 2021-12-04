@@ -13,6 +13,9 @@ test:
 migrate:
 	docker exec foxwood_php-cli_1 php artisan migrate
 
+run:
+	docker exec foxwood_php-cli_1 $(cmd)
+
 perm:
 	sudo chown ${USER}:${USER} . -R
 	chmod -R 777 storage
