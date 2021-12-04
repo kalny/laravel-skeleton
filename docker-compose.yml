@@ -1,0 +1,58 @@
+version: "3.8"
+services:
+    nginx:
+        build:
+            context: ./
+            dockerfile: docker/nginx.docker
+        volumes:
+            - ./:/var/www
+        ports:
+            - "8080:80"
+        links:
+            - php-fpm
+    php-fpm:
+        build:
+            context: ./
+            dockerfile: docker/php-fpm.docker
+        volumes:
+            - ./:/var/www
+        links:
+            - mysql
+        environment:
+            - "DB_PORT=3306"
+            - "DB_HOST=mysql"
+            - "REDIS_PORT=6379"
+            - "REDIS_HOST=redis"
+            - "ELASTICSEARCH_HOSTS=elasticsearch:9200"
+    php-cli:
+        build:
+            context: ./
+            dockerfile: docker/php-cli.docker
+        volumes:
+            - ./:/var/www
+        links:
+            - mysql
+        environment:
+            - "DB_PORT=3306"
+            - "DB_HOST=mysql"
+            - "REDIS_PORT=6379"
+            - "REDIS_HOST=redis"
+        tty: true
+    mysql:
+        image: mysql:8.0
+        volumes:
+            - ./storage/docker/mysql:/var/lib/mysql
+        environment:
+            - "MYSQL_ROOT_PASSWORD=foxwood"
+            - "MYSQL_USER=foxwood"
+            - "MYSQL_PASSWORD=foxwood"
+            - "MYSQL_DATABASE=foxwood"
+        ports:
+            - "33061:3306"
+    node:
+        build:
+            context: ./
+            dockerfile: docker/node.docker
+        volumes:
+            - ./:/var/www
+        tty: true
