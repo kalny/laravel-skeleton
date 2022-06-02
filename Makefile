@@ -20,6 +20,7 @@ perm:
 	sudo chown ${USER}:${USER} . -R
 	chmod -R 777 storage
 	chmod -R 777 bootstrap/cache
+	chmod -R 777 .env
 
 assets-install:
 	docker-compose exec node yarn install
