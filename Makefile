@@ -1,5 +1,5 @@
 docker-up:
-	docker-compose up -d
+	docker-compose up -d --remove-orphans
 
 docker-down:
 	docker-compose down
@@ -33,3 +33,12 @@ assets-prod:
 
 assets-watch:
 	docker-compose exec node yarn run watch
+
+npm-install:
+	docker-compose exec node npm install
+
+npm-run-dev:
+	docker-compose exec node npm run dev
+
+npm-run-prod:
+	docker-compose exec node npm run prod
